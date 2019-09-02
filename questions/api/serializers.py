@@ -28,7 +28,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     created_at = serializers.SerializerMethodField(read_only=True)
     slug = serializers.SlugField(read_only=True)
     answers_count = serializers.SerializerMethodField(read_only=True)
-    user_has_voted = serializers.SerializerMethodField(read_only=True)
+    user_has_answered = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Question
@@ -38,8 +38,8 @@ class QuestionSerializer(serializers.ModelSerializer):
         return instance.created_at.strftime("%B %d % Y")
 
     def get_answers_count(self, instance):
-        return instance.answers_count()
+        return instance.answers.count()
 
-    def get_user_has_answered(self, intance):
+    def get_user_has_answered(self, instance):
         request = self.context.get("request")
         return instance.answers.filter(author=request.user).exists()
