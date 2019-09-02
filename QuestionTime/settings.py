@@ -128,7 +128,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOGIN_URL = "accounts/login/"
-LOGIIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
 LOGOU_REDIRECT_URL = "/"
 
 
@@ -149,5 +149,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
