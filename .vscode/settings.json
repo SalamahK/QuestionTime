@@ -1,3 +1,4 @@
 {
-    "terminal.integrated.setLocaleVariables": false
+    "terminal.integrated.setLocaleVariables": false,
+    "python.pythonPath": "/home/thales/.pyenv/versions/3.7.0/bin/python"
 }
