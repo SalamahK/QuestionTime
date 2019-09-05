@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .my-navbar {
   border-bottom: 1px solid #ddd;
 }
