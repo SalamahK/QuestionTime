@@ -17,8 +17,8 @@ function apiService(endpoint, method, data) {
     method: method || "GET",
     body: data !== undefined ? JSON.stringify(data) : null,
     headers: {
-      "content-type": "application/json",
-      "X-CSRFTOKEN": CSRF_TOKEN
+      'content-type': 'application/json',
+      'X-CSRFTOKEN': CSRF_TOKEN
     }
   };
   return fetch(endpoint, config)
