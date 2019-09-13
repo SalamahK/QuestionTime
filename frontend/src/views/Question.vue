@@ -39,7 +39,9 @@
         <AnswerComponent 
         v-for="(answer, index) in answers"
         :answer="answer"
+        :requestUser="requestUser"
         :key="index"
+        @delete-answer="deleteAnswer"
         />
     
     <div class="my-4">
@@ -81,12 +83,16 @@ export default {
             showForm: false,
             next: null,
             loadingAnswers: false,
+            requestUser: null
 
             }
         },
         methods: {
             setPageTitle(title) {
                 document.title = title;
+            },
+            setRequestUser(){
+                this.requestUser = window.localStorage.getItem("username");
             },
             getQuestionData(){
                 let endpoint = `/api/questions/${this.slug}/`;
@@ -130,11 +136,24 @@ export default {
             }else{
                 this.error = "You cant send an empty answer!";
             }
+        },
+        async deleteAnswer(answer){
+            let endpoint = `/api/answers/${answer.id}/`;
+            try{
+                await apiService(endpoint, "DELETE")
+                this.$delete(this.answers, this.answers.indexOf(answer))
+                this.userHasAnswered=false;
+            }
+            catch(err){
+                console.log(err);
+            }
         }
+
         },
         created(){
             this.getQuestionData()
             this.getQuestionsAnswers()
+            this.setRequestUser()
         }
     }
 
